@@ -12,6 +12,13 @@ class QuestionPage extends React.Component {
     this.setState({ selectedQuestion: this.props.exam.questions[0] });
   };
 
+  nextQuestion = () => {
+    this.setState({ selectedIndex: this.state.selectedIndex + 1 });
+    this.setState({
+      selectedQuestion: this.props.exam.questions[this.state.selectedIndex],
+    });
+  };
+
   render() {
     return (
       <div>
@@ -21,6 +28,7 @@ class QuestionPage extends React.Component {
             index={this.state.selectedIndex}
             question={this.state.selectedQuestion}
             examID={this.props.exam._id}
+            nextQuestion={this.nextQuestion}
           />
         )}
       </div>
