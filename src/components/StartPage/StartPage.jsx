@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Form } from "react-bootstrap";
+import { Container, Row, Form, Button } from "react-bootstrap";
 
 class StartPage extends React.Component {
   state = {
@@ -7,6 +7,7 @@ class StartPage extends React.Component {
       candidateName: "",
       name: "",
     },
+    examContent: {},
   };
 
   updateState = (e) => {
@@ -16,6 +17,29 @@ class StartPage extends React.Component {
     this.setState({ startExam: startExam });
   };
 
+  fetchExam = async () => {
+    try {
+      let response = await fetch(`http://localhost:8008/exams/start`, {
+        method: "POST",
+        body: JSON.stringify(this.state.startExam),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      let exam = await response.json();
+      this.setState({ examContent: exam });
+      console.log(exam);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  submitExam = (e) => {
+    e.preventDefault();
+    console.log("BUTTON PRESSED");
+    this.fetchExam();
+  };
+
   render() {
     return (
       <Container>
@@ -23,7 +47,7 @@ class StartPage extends React.Component {
           <h1>ENTER NAME AND TEST NAME</h1>
         </Row>
         <Row>
-          <Form>
+          <Form onSubmit={this.submitExam}>
             <Form.Group>
               <Form.Label>Enter Your Name</Form.Label>
               <Form.Control
@@ -44,6 +68,9 @@ class StartPage extends React.Component {
                 onChange={(e) => this.updateState(e)}
               />
             </Form.Group>
+            <Button type="submit" value="Submit">
+              Submit
+            </Button>
           </Form>
         </Row>
       </Container>
