@@ -78,11 +78,11 @@ class Questions extends React.Component {
                     label={answer.text}
                     onClick={() =>
                       this.setState({
-                        isSelected: true,
                         answer: {
                           question: this.props.index,
                           answer: index,
                         },
+                        isSelected: true,
                       })
                     }
                   />

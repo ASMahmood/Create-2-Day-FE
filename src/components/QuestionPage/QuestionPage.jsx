@@ -14,9 +14,10 @@ class QuestionPage extends React.Component {
   };
 
   nextQuestion = () => {
-    this.setState({ selectedIndex: this.state.selectedIndex + 1 });
+    let newNumber = this.state.selectedIndex + 1;
     this.setState({
-      selectedQuestion: this.props.exam.questions[this.state.selectedIndex],
+      selectedIndex: newNumber,
+      selectedQuestion: this.props.exam.questions[newNumber],
     });
   };
 
@@ -24,14 +25,15 @@ class QuestionPage extends React.Component {
     return (
       <div>
         <h1>QUESTIONS GO HERE</h1>
-        {this.state.selectedQuestion.hasOwnProperty("text") &&
-        this.state.selectedIndex <= 4 ? (
-          <Questions
-            index={this.state.selectedIndex}
-            question={this.state.selectedQuestion}
-            examID={this.props.exam._id}
-            nextQuestion={this.nextQuestion}
-          />
+        {this.state.selectedIndex <= 4 ? (
+          this.state.selectedQuestion.hasOwnProperty("text") && (
+            <Questions
+              index={this.state.selectedIndex}
+              question={this.state.selectedQuestion}
+              examID={this.props.exam._id}
+              nextQuestion={this.nextQuestion}
+            />
+          )
         ) : (
           <Scoreboard examID={this.props.exam._id} />
         )}
