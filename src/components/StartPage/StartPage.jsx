@@ -27,8 +27,8 @@ class StartPage extends React.Component {
         },
       });
       let exam = await response.json();
-      this.setState({ examContent: exam });
-      console.log(exam);
+      this.props.beginExam(exam);
+      this.props.history.push("/exam/" + exam._id);
     } catch (error) {
       console.log(error);
     }
