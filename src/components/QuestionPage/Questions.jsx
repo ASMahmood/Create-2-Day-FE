@@ -60,21 +60,55 @@ class Questions extends React.Component {
     }
   };
 
+  reduceTime = () => {
+    let timeLeft = 100;
+    let progressTimer = setInterval(() => {
+      if (timeLeft <= 0) {
+        clearInterval(progressTimer);
+      }
+      document.querySelector("#progressBar").now = 100 - timeLeft;
+      timeLeft -= 1;
+    }, 1000);
+    return 10;
+  };
+
   render() {
     return (
-      <Container>
+      <Container
+        className="d-flex flex-column justify-content-center align-items-center"
+        style={{ height: "100vh" }}
+      >
         {console.log(this.props.question)}
-        <Row>{this.props.question.text}</Row>
+        <Row
+          className="w-50 mb-4 justify-content-center"
+          style={{ display: "block" }}
+        >
+          <ProgressBar
+            id="progressBar"
+            variant="success"
+            now={this.reduceTime()}
+          />
+        </Row>
+        <Row className="w-50 mb-4 justify-content-center">
+          {this.props.question.text}
+        </Row>
 
-        <Row>
-          <Form onSubmit={this.submitAnswer}>
+        <Row className="w-50">
+          <Form
+            onSubmit={this.submitAnswer}
+            className="w-100 justify-content-between"
+          >
             <Form.Group as={Row}>
               {this.props.question.answers.map((answer, index) => (
-                <Col xs={6} key={index}>
+                <Col
+                  xs={6}
+                  key={index}
+                  className="d-flex justify-content-center"
+                >
                   <Form.Check
                     type="radio"
                     name="answerChecks"
-                    id={index}
+                    id={"answer" + index}
                     label={answer.text}
                     onClick={() =>
                       this.setState({
@@ -89,7 +123,11 @@ class Questions extends React.Component {
                 </Col>
               ))}
             </Form.Group>
-            {this.state.isSelected && <Button type="submit">NEXT</Button>}
+            {this.state.isSelected && (
+              <Button type="submit" variant="success" className="w-100">
+                NEXT
+              </Button>
+            )}
           </Form>
         </Row>
       </Container>

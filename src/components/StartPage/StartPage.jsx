@@ -42,9 +42,12 @@ class StartPage extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Row>
-          <h1>ENTER NAME AND TEST NAME</h1>
+      <Container
+        className="d-flex align-items-center justify-content-center flex-column"
+        style={{ height: "100vh" }}
+      >
+        <Row className="mb-3">
+          <h1>UGLY TESTS'R'US</h1>
         </Row>
         <Row>
           <Form onSubmit={this.submitExam}>
@@ -68,7 +71,12 @@ class StartPage extends React.Component {
                 onChange={(e) => this.updateState(e)}
               />
             </Form.Group>
-            <Button type="submit" value="Submit">
+            <Button
+              type="submit"
+              value="Submit"
+              variant="success"
+              className="w-100"
+            >
               Submit
             </Button>
           </Form>

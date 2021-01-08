@@ -24,7 +24,6 @@ class QuestionPage extends React.Component {
   render() {
     return (
       <div>
-        <h1>QUESTIONS GO HERE</h1>
         {this.state.selectedIndex <= 4 ? (
           this.state.selectedQuestion.hasOwnProperty("text") && (
             <Questions
