@@ -53,7 +53,7 @@ class Questions extends React.Component {
           },
         }
       );
-      let res = res.body;
+      let res = response.body;
       console.log(res);
     } catch (error) {
       console.log(error);

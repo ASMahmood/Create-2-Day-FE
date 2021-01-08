@@ -1,4 +1,5 @@
 import React from "react";
+import Scoreboard from "../Scoreboard/Scoreboard";
 import Questions from "./Questions";
 
 class QuestionPage extends React.Component {
@@ -23,13 +24,16 @@ class QuestionPage extends React.Component {
     return (
       <div>
         <h1>QUESTIONS GO HERE</h1>
-        {this.state.selectedQuestion.hasOwnProperty("text") && (
+        {this.state.selectedQuestion.hasOwnProperty("text") &&
+        this.state.selectedIndex <= 4 ? (
           <Questions
             index={this.state.selectedIndex}
             question={this.state.selectedQuestion}
             examID={this.props.exam._id}
             nextQuestion={this.nextQuestion}
           />
+        ) : (
+          <Scoreboard examID={this.props.exam._id} />
         )}
       </div>
     );
